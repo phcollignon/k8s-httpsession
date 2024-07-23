@@ -1,18 +1,14 @@
-# Start with a base image containing Java runtime
-FROM openjdk:17-jdk-alpine
+# Use the official Tomcat base image
+FROM tomcat:10.1-jdk17
 
-# Add a volume pointing to /tmp
-VOLUME /tmp
+# Remove the default ROOT webapp
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
-# Make port 8080 available to the world outside this container
+# Copy the WAR file to the webapps directory
+COPY target/k8s_httpsession-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
+
+# Expose the Tomcat port
 EXPOSE 8080
 
-# The application's jar file
-ARG JAR_FILE=target/k8-httpsession-0.0.1-SNAPSHOT.jar
-
-# Add the application's jar to the container
-ADD ${JAR_FILE} app.jar
-
-# Run the jar file
-ENTRYPOINT ["java","-jar","/app.jar"]
-
+# Start Tomcat
+CMD ["catalina.sh", "run"]
