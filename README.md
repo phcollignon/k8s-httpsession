@@ -57,7 +57,7 @@ minikube ip
    ```bash
    kubectl get pods
    ```
-4. Access the application at `http://basic-session.local` and observe the counter behavior when refreshing the page or opening in different browsers.
+4. Access the application at `http://basic-session.local` and observe the counter behavior.
 
 #### Deploying `sticky-session`
 
@@ -72,7 +72,7 @@ minikube ip
    ```
 4. Access the application at `http://sticky-session.local` and observe the counter behavior. The session should stick to different client browser's session.
 
-5. To facilitate monitoring, a script named `logs.sh` is provided to collect logs from all pods. The script will output logs from all running pods for the respective application, making it easier to debug issues or understand application behavior.  
+5. To facilitate monitoring, a script named `logs.sh` is provided to collect logs from all pods. 
 6. You should see that HTTP sessions are distributed among the pods. However, the sessions are sticky, and there is no problem as long as a pod is not deleted.
 7. Try to delete a pod and see the result:
    ```bash
@@ -92,14 +92,14 @@ minikube ip
    ```bash
    kubectl get pods
    ```
-5. Access the application at `http://redis-session.local` and observe the counter behavior. The session data should persist across multiple instances, even if the page is refreshed or accessed from different browsers.
+5. Access the application at `http://redis-session.local` and observe the counter behavior. The session data should persist across multiple instances.
 
-6. While the `sticky-session` or `redis-session` application is running with multiple instances, simulate a node failure by deleting one pod:
+6. Simulate a node failure by deleting one pod:
    ```bash
    kubectl delete pod <pod_name>
    ```
  
-7. Refresh the page or continue to use the application. For `sticky-session`, observe if the session persists or resets. For `redis-session`, the session should persist because the data is stored in a shared Redis instance, unaffected by individual pod failures.
+7. Refresh the page or continue to use the application. For `redis-session`, the session should persist because the data is stored in a shared Redis instance, unaffected by individual pod failures.
 
 ### Conclusion
 This setup demonstrates the differences in HTTP session handling in a Kubernetes environment, from no session affinity to sticky sessions and shared session storage with Redis. It highlights the advantages of using Redis for session persistence and reliability in distributed systems.
