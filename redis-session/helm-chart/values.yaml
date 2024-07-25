@@ -1,0 +1,48 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/phcollignon/k8s-httpsession-redis
+  tag: latest
+  pullPolicy: Always
+
+application:
+  redisHost: "{{ .Release.Name }}-redis-master"
+  redisPort: 6379
+
+redis:
+  enabled: true
+  usePassword: false
+  cluster:
+    enabled: false
+  master:
+    persistence:
+      enabled: false  
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
+
+  hosts:
+    - host: redis-session.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

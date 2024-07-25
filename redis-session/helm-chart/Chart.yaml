@@ -1,0 +1,10 @@
+apiVersion: v2
+name: k8s_httpsession
+description: A Helm chart for Kubernetes
+version: 0.1.0
+appVersion: "1.0"
+
+dependencies:
+  - name: redis
+    version: 19.6.4
+    repository: https://charts.bitnami.com/bitnami
