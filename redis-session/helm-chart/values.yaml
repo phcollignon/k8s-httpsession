@@ -9,15 +9,6 @@ application:
   redisHost: "{{ .Release.Name }}-redis-master"
   redisPort: 6379
 
-redis:
-  enabled: true
-  usePassword: false
-  cluster:
-    enabled: false
-  master:
-    persistence:
-      enabled: false  
-
 service:
   type: ClusterIP
   port: 80
@@ -46,3 +37,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+redis:
+  auth: 
+    enabled: false
+
