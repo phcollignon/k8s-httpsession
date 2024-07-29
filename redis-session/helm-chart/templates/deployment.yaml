@@ -17,12 +17,13 @@ spec:
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
           resources:
 {{- toYaml .Values.resources | nindent 12 }}
-          env:
-            - name: SPRING_REDIS_HOST
-              value: "{{ .Values.application.redisHost }}"
-            - name: SPRING_REDIS_PORT
-              value: "{{ .Values.application.redisPort }}"
+#          env:
+#            - name: REDIS_HOST
+#              value: "{{ .Release.Name }}-{{ .Values.application.redisHost }}"
+#            - name: REDIS_PORT
+#              value: "{{ .Values.application.redisPort }}"

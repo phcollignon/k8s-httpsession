@@ -6,7 +6,7 @@ image:
   pullPolicy: Always
 
 application:
-  redisHost: "{{ .Release.Name }}-redis-master"
+  redisHost: master
   redisPort: 6379
 
 service:
