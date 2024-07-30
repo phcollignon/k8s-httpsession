@@ -56,6 +56,7 @@ public class CounterController {
         if (counter != null) {
             logger.info("Resetting counter. Server info: {}", serverInfo);
             counter.reset();
+            session.setAttribute(COUNTER_SESSION_KEY, counter);
         } else {
             logger.warn("Counter not found in session. Server info: {}", serverInfo);
         }
