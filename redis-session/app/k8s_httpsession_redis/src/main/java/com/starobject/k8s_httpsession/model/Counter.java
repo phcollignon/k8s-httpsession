@@ -1,6 +1,6 @@
 package com.starobject.k8s_httpsession.model;
 import java.io.Serializable;
-public class Counter {
+public class Counter implements Serializable {
     
     private int count;
 

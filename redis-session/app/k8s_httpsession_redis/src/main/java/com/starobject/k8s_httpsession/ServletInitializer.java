@@ -22,9 +22,6 @@ public class ServletInitializer extends SpringBootServletInitializer {
 	public LettuceConnectionFactory connectionFactory() {
 		return new LettuceConnectionFactory(); 
 	}
-
-	@Bean
-    public HttpSessionIdResolver httpSessionIdResolver() {
-        return CookieHttpSessionIdResolver.withDefaults();
-    }
 }
+
+

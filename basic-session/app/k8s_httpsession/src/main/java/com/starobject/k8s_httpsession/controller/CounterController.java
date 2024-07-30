@@ -42,6 +42,7 @@ public class CounterController {
         if (counter != null) {
             logger.info("Incrementing counter. Current value: {}. Server info: {}", counter.getCount(), serverInfo);
             counter.increment();
+            session.setAttribute(COUNTER_SESSION_KEY, counter);
         } else {
             logger.warn("Counter not found in session. Server info: {}", serverInfo);
         }
